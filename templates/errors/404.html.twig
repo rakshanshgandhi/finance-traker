@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}404 Not Found{% endblock %}
+
+{% block body %}
+<div class="container mx-auto text-center pt-12">
+    <h1 class="text-5xl text-[#ff0000] font-bold mb-6">404</h1>
+    <p class="text-lg text-[#1a1a1a] mb-4">Oops! The page you're looking for doesn't exist.</p>
+    <a href="{{ path('app_home') }}" 
+       class="bg-[#1a1a1a] text-white px-6 py-2 rounded-lg hover:bg-[#4d4d4d] transition duration-300">
+        Go Back to Home
+    </a>
+</div>
+{% endblock %}

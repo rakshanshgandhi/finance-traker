@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Transaction{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto pt-12 px-6">
+        <h1 class="text-3xl text-[#1a1a1a] font-extrabold mb-6 text-center">
+            Edit Transaction
+        </h1>
+        <!-- Display form -->
+        {{ form_start(form) }}
+        
+        <!-- Description field -->
+        <div class="mb-6">
+            <label for="{{ form.description.vars.id }}" class="block text-lg font-semibold text-[#1a1a1a] mb-2">
+                Description
+            </label>
+            {{ form_widget(form.description, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1a1a1a] focus:border-[#1a1a1a]'}}) }}
+            {{ form_errors(form.description) }}
+        </div>
+
+        <!-- Amount field -->
+        <div class="mb-6">
+            <label for="{{ form.amount.vars.id }}" class="block text-lg font-semibold text-[#1a1a1a] mb-2">
+                Amount
+            </label>
+            {{ form_widget(form.amount, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1a1a1a] focus:border-[#1a1a1a]'}}) }}
+            {{ form_errors(form.amount) }}
+        </div>
+
+        <!-- Submit button -->
+        <div class="mb-6 text-center">
+            <button type="submit" class="bg-[#1a1a1a] text-white px-8 py-3 rounded-lg hover:bg-[#4d4d4d] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a] transition duration-300">
+                Save Changes
+            </button>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

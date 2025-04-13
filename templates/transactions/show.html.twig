@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your Transactions
+{% endblock %}
+
+{% block body %}
+	<div class="container mx-auto pt-12">
+		<h1 class="text-3xl text-[#1a1a1a] font-extrabold mb-6 text-center">
+			Your Transactions
+		</h1>
+
+		{% for flash_message in app.flashes('error') %}
+			<div class="flash-message bg-red-500 text-white p-4 rounded mb-4">
+				{{ flash_message }}
+			</div>
+		{% endfor %}
+
+		{% for flash_message in app.flashes('success') %}
+			<div class="flash-message bg-green-500 text-white p-4 rounded mb-4">
+				{{ flash_message }}
+			</div>
+		{% endfor %}
+
+		<!-- Add Transaction Button -->
+		<div class="w-4/5 mx-auto mb-6 text-right">
+			<a href="{{ path('app_create') }}" class="bg-[#1a1a1a] text-white px-4 py-2 rounded-xl hover:bg-[#4d4d4d] transition duration-300">
+				Add Transaction
+			</a>
+		</div>
+
+		{% if transactions is empty %}
+			<p class="text-center text-[#808080]">No transactions found.</p>
+		{% else %}
+			<div class="w-4/5 mx-auto">
+				<table class="w-full text-left border-collapse">
+					<thead>
+						<tr>
+							<th class="border-b-2 border-[#4d4d4d] px-4 py-2">ID</th>
+							<th class="border-b-2 border-[#4d4d4d] px-4 py-2">Description</th>
+							<th class="border-b-2 border-[#4d4d4d] px-4 py-2">Amount</th>
+							<th class="border-b-2 border-[#4d4d4d] px-4 py-2">Date</th>
+							<th class="border-b-2 border-[#4d4d4d] px-4 py-2">Actions</th>
+							<!-- New column for actions -->
+						</tr>
+					</thead>
+					<tbody>
+						{% for transaction in transactions %}
+							<tr>
+								<td class="border-b border-[#e6e6e6] px-4 py-2">{{ transaction.id }}</td>
+								<td class="border-b border-[#e6e6e6] px-4 py-2">{{ transaction.description }}</td>
+								<td class="border-b border-[#e6e6e6] px-4 py-2">{{ transaction.amount }}</td>
+								<td class="border-b border-[#e6e6e6] px-4 py-2">{{ transaction.createdAt|date('d/m/Y') }}</td>
+								<td
+									class="border-b border-[#e6e6e6] px-4 py-2 flex gap-4 items-center">
+									<!-- Edit Icon -->
+									<a href="{{ path('app_edit_transaction', {'id': transaction.id}) }}" class="text-blue-500 hover:text-blue-700 transition duration-300" title="Edit Transaction">
+										<i class="fas fa-edit"></i>
+									</a>
+
+									<!-- Delete Icon -->
+									<form method="post" action="{{ path('app_delete_transaction', {'id': transaction.id}) }}" onsubmit="return confirm('Are you sure you want to delete this transaction?');" style="display: inline;">
+										<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ transaction.id) }}">
+										<button type="submit" class="text-red-500 hover:text-red-700 transition duration-300" title="Delete Transaction">
+											<i class="fas fa-trash-alt"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

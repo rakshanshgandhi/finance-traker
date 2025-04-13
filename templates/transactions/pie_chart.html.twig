@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pie Chart{% endblock %}
+
+{% block body %}
+    <h1 class="text-3xl text-[#1a1a1a] font-extrabold mb-6 text-center">Transaction Pie Chart</h1>
+
+    <!-- Container for Pie Chart and Information -->
+    <div class="max-w-3xl mx-auto rounded-md p-6">
+        <div class="flex flex-wrap justify-center gap-10 mb-6">
+            <!-- Pie Chart -->
+            <div class="w-full sm:w-auto max-w-xs flex-shrink-0">
+                <canvas id="pieChart"></canvas>
+            </div>
+
+            <!-- Transaction Information -->
+            <div class="w-full sm:flex-1">
+                <h2 class="text-xl font-medium mb-4 text-center text-[#1a1a1a]">Transaction Overview</h2>
+
+                <p class="text-lg mb-3"><strong>Total Income: </strong> ₹{{ pieChartData['Income'] | number_format(2) }}</p>
+                <p class="text-lg mb-3"><strong>Total Expense: </strong> ₹{{ pieChartData['Expense'] | number_format(2) }}</p>
+                <p class="text-lg mb-6"><strong>Net Balance: </strong> ₹{{ (pieChartData['Income'] - pieChartData['Expense']) | number_format(2) }}</p>
+
+                <!-- Financial Advice -->
+                <div class="mt-6">
+                    <h3 class="font-semibold text-lg mb-3">Financial Advice:</h3>
+                    <p>
+                        If your expenses are close to or exceed your income, consider evaluating your spending habits.
+                        Try to minimize discretionary spending or increase your income to achieve a healthier balance.
+                    </p>
+                </div>
+
+                <!-- Button to view more transactions -->
+                <div class="mt-6 text-center">
+                    <a href="{{ path('app_show') }}" class="px-6 py-2 bg-[#1a1a1a] text-white rounded-xl hover:bg-[#4d4d4d] transition duration-300 ease-in-out">View Detailed Transactions</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Prepare the data passed from the controller
+        const data = {
+            labels: ['Income', 'Expense'],
+            datasets: [{
+                label: 'Transaction Types',
+                data: [{{ pieChartData['Income'] }}, {{ pieChartData['Expense'] }}], // Dynamic data from the controller
+                backgroundColor: ['#4CAF50', '#F44336'], // Green for Income, Red for Expense
+                hoverOffset: 4
+            }]
+        };
+
+        // Get the context of the canvas element
+        const ctx = document.getElementById('pieChart').getContext('2d');
+
+        // Create the Pie Chart
+        new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            // Custom tooltip for showing total amount instead of count
+                            label: function(tooltipItem) {
+                                const label = tooltipItem.label;
+                                const value = tooltipItem.raw; // Get the value (amount)
+                                
+                                // Show the total amount for Income or Expense with the currency
+                                return label + ': ₹' + value.toLocaleString() + ' INR';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}

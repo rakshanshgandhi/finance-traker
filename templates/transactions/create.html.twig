@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Transaction{% endblock %}
+
+{% block body %}
+<div class="container mx-auto pt-12">
+    <h1 class="text-3xl text-[#1a1a1a] font-extrabold mb-6 text-center">
+        Add a New Transaction
+    </h1>
+
+    <!-- Form for creating transaction -->
+    <div class="w-4/5 mx-auto p-8">
+        <form method="post" action="{{ path('app_create') }}">
+            {{ form_start(form) }}
+            
+            <div class="mb-6">
+                <label for="transaction_description" class="block text-[#1a1a1a] text-lg font-semibold mb-2">Description</label>
+                {{ form_widget(form.description, {'attr': {'class': 'w-full px-4 py-2 border border-[#e6e6e6] rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+
+            <div class="mb-6">
+                <label for="transaction_amount" class="block text-[#1a1a1a] text-lg font-semibold mb-2">Amount</label>
+                {{ form_widget(form.amount, {'attr': {'class': 'w-full px-4 py-2 border border-[#e6e6e6] rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500'}}) }}
+                {{ form_errors(form.amount) }}
+            </div>
+
+            <div class="mb-6">
+                <label for="transaction_createdAt" class="block text-[#1a1a1a] text-lg font-semibold mb-2">Date</label>
+                {{ form_widget(form.createdAt, {'attr': {'class': 'w-full px-4 py-2 border border-[#e6e6e6] rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500'}}) }}
+                {{ form_errors(form.createdAt) }}
+            </div>
+
+            <div class="mt-8">
+                <button type="submit" class="w-full py-3 px-4 bg-[#1a1a1a] text-white font-semibold rounded-md hover:bg-[#4d4d4d] focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    Add Transaction
+                </button>
+            </div>
+            
+            {{ form_end(form) }}
+        </form>
+    </div>
+</div>
+{% endblock %}

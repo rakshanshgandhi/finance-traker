@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Privacy Policy{% endblock %}
+
+{% block body %}
+    <div class="max-w-5xl mx-auto p-6">
+        <h1 class="text-3xl text-[#1a1a1a] font-extrabold mb-6 text-center">Privacy Policy</h1>
+        <p class="text-lg leading-relaxed mb-4">
+            Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your personal information when you use our application.
+        </p>
+
+        <h2 class="text-2xl font-semibold mb-4">1. Information We Collect</h2>
+        <ul class="list-disc pl-6 mb-4">
+            <li>Personal information (e.g., name, email address, contact information).</li>
+            <li>Usage data (e.g., IP address, browser type, and usage patterns).</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold mb-4">2. How We Use Your Information</h2>
+        <p class="mb-4">
+            We use your information to provide, maintain, and improve our services, as well as to communicate with you about your account or transactions.
+        </p>
+
+        <h2 class="text-2xl font-semibold mb-4">3. Sharing Your Information</h2>
+        <p class="mb-4">
+            We do not share your personal information with third parties except as necessary to provide our services or as required by law.
+        </p>
+
+        <h2 class="text-2xl font-semibold mb-4">4. Your Rights</h2>
+        <p class="mb-4">
+            You have the right to access, update, or delete your personal information. Please contact us if you wish to exercise these rights.
+        </p>
+
+        <h2 class="text-2xl font-semibold mb-4">5. Security</h2>
+        <p class="mb-4">
+            We implement security measures to protect your personal information from unauthorized access, alteration, or disclosure.
+        </p>
+
+        <h2 class="text-2xl font-semibold mb-4">6. Changes to This Privacy Policy</h2>
+        <p class="mb-4">
+            We may update this Privacy Policy from time to time. Changes will be posted on this page with a revised effective date.
+        </p>
+
+        <h2 class="text-2xl font-semibold mb-4">7. Contact Us</h2>
+        <p class="mb-4">
+            If you have any questions about this Privacy Policy, please contact us at <strong>rakshanshgandhi@gmail.com</strong>.
+        </p>
+
+        <div class="mt-6 text-center">
+            <a href="{{ path('app_home') }}" class="px-6 py-2 bg-[#1a1a1a] text-white rounded-md hover:bg-[#4d4d4d] transition duration-300 ease-in-out">
+                Back to Home
+            </a>
+        </div>
+    </div>
+{% endblock %}

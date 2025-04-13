@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Terms of Service{% endblock %}
+
+{% block body %}
+    <div class="max-w-4xl mx-auto py-8 px-4">
+        <h1 class="text-3xl text-[#1a1a1a] font-extrabold mb-6 text-center">Terms of Service</h1>
+        
+        <section class="mb-6">
+            <h2 class="text-xl font-semibold mb-4">1. Acceptance of Terms</h2>
+            <p>
+                By accessing and using this website, you agree to comply with and be bound by these Terms of Service.
+                If you do not agree to these terms, please do not use our services.
+            </p>
+        </section>
+
+        <section class="mb-6">
+            <h2 class="text-xl font-semibold mb-4">2. Modifications to Terms</h2>
+            <p>
+                We reserve the right to update these Terms of Service at any time without prior notice.
+                Continued use of the service constitutes your acceptance of the modified terms.
+            </p>
+        </section>
+
+        <section class="mb-6">
+            <h2 class="text-xl font-semibold mb-4">3. User Obligations</h2>
+            <p>
+                Users agree not to use the website for any unlawful activities and to comply with all applicable laws and regulations.
+            </p>
+        </section>
+
+        <section class="mb-6">
+            <h2 class="text-xl font-semibold mb-4">4. Limitation of Liability</h2>
+            <p>
+                We shall not be held liable for any direct, indirect, incidental, or consequential damages arising from the use of our services.
+            </p>
+        </section>
+
+        <section class="mb-6">
+            <h2 class="text-xl font-semibold mb-4">5. Governing Law</h2>
+            <p>
+                These Terms of Service are governed by the laws of your jurisdiction, without regard to its conflict of law provisions.
+            </p>
+        </section>
+
+        <div class="text-center mt-8">
+            <a href="{{ path('app_home') }}" class="px-6 py-2 bg-[#1a1a1a] text-white rounded-md hover:bg-[#4d4d4d] transition duration-300 ease-in-out">Back to Home</a>
+        </div>
+    </div>
+{% endblock %}

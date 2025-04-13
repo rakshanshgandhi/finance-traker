@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Welcome to Finance Tracker
+{% endblock %}
+
+{% block body %}
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-[#1a1a1a] to-[#4d4d4d] text-white py-20 text-center">
+        <div class="container mx-auto">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+                Take Control of Your Finances
+            </h1>
+            <p class="text-lg md:text-xl mb-6 text-gray-300">
+                Track, visualize, and manage your transactions effortlessly with Finance Tracker.
+            </p>
+            <a href="{{ path('app_create') }}" class="bg-white text-[#1a1a1a] px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300">
+                Get Started
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section (unchanged) -->
+    <section class="container mx-auto my-12 px-6">
+        <h2 class="text-3xl font-bold text-center mb-8 text-[#1a1a1a]">Why Use Our Finance Tracker?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="text-center p-6 shadow-md rounded-lg hover:shadow-lg transition duration-300">
+                <div class="text-5xl mb-4 text-[#1a1a1a]">💰</div>
+                <h3 class="text-xl font-semibold mb-2">Track Transactions</h3>
+                <p class="text-gray-600">Easily log and view all your financial transactions in one place.</p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="text-center p-6 shadow-md rounded-lg hover:shadow-lg transition duration-300">
+                <div class="text-5xl mb-4 text-[#1a1a1a]">📊</div>
+                <h3 class="text-xl font-semibold mb-2">Visualize Expenses</h3>
+                <p class="text-gray-600">Understand where your money is going with easy-to-read reports.</p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="text-center p-6 shadow-md rounded-lg hover:shadow-lg transition duration-300">
+                <div class="text-5xl mb-4 text-[#1a1a1a]">⚙️</div>
+                <h3 class="text-xl font-semibold mb-2">Simple and Secure</h3>
+                <p class="text-gray-600">A user-friendly and secure way to manage your financial data.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section class="bg-[#f5f5f5] py-12 text-center">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-[#1a1a1a] mb-4">
+                Ready to Get Started?
+            </h2>
+            <p class="text-gray-600 mb-6">
+                Join now and take control of your financial future.
+            </p>
+            <a href="{{ path('app_create') }}" class="bg-[#1a1a1a] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#4d4d4d] transition duration-300">
+                Add Your First Transaction
+            </a>
+        </div>
+    </section>
+{% endblock %}

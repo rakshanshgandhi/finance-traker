@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Finance Tracker{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <style>
+        /* Custom underline animation */
+        .underline-animation {
+            position: relative;
+            display: inline-block;
+        }
+
+        .underline-animation::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #e6e6e6; 
+            transition: width 0.3s ease;
+        }
+
+        .underline-animation:hover::after {
+            width: 100%;
+        }
+
+        .flash-message {
+            animation: fadeOut 5s forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            40% {
+                opacity: 0.6;
+            }
+            60% {
+                opacity: 0.4;
+            }
+            80% {
+                opacity: 0.2;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen antialiased font-sans text-gray-900 flex flex-col">
+
+    {% block header %}
+        <header class="bg-[#1a1a1a] text-white fixed top-0 left-0 w-full z-50 shadow-lg">
+            <nav class="container mx-auto flex items-center justify-between p-4" x-data="{ isOpen: false }">
+                <!-- Logo -->
+                <a href="/" class="text-2xl font-bold tracking-wider hover:text-[#e6e6e6]">
+                    Finance Tracker
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button @click="isOpen = !isOpen" class="lg:hidden text-[#b3b3b3] hover:text-[#e6e6e6] focus:outline-none">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path x-show="!isOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        <path x-show="isOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <!-- Navigation Links -->
+                <div class="hidden lg:flex space-x-6">
+                    <a href="/temp" class="underline-animation text-[#b3b3b3] hover:text-[#e6e6e6] transition duration-200">Home</a>
+                    <a href="/contact" class="underline-animation text-[#b3b3b3] hover:text-[#e6e6e6] transition duration-200">Contact</a>
+                    
+                    {% if app.user %}
+                        <!-- Pie Chart Link -->
+                        <a href="{{ path('app_pie_chart') }}" class="underline-animation text-[#b3b3b3] hover:text-[#e6e6e6] transition duration-200">
+                            Pie Chart
+                        </a>
+
+                        <!-- Transactions Link -->
+                        <a href="{{ path('app_show') }}" class="underline-animation text-[#b3b3b3] hover:text-[#e6e6e6] transition duration-200">
+                            Transactions
+                        </a>
+                        
+                        <a href="{{ path('app_logout') }}" class="underline-animation text-[#b3b3b3] hover:text-[#e6e6e6] transition duration-200">
+                            Logout
+                        </a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="underline-animation text-[#b3b3b3] hover:text-[#e6e6e6] transition duration-200">
+                            Login
+                        </a>
+                        <a href="{{ path('app_register') }}" class="underline-animation text-[#b3b3b3] hover:text-[#e6e6e6] transition duration-200">
+                            Register
+                        </a>
+                    {% endif %}
+                </div>
+
+                <!-- Mobile Menu -->
+                <div x-show="isOpen" class="absolute top-full left-0 w-full bg-[#1a1a1a] text-white lg:hidden">
+                    <a href="/" class="block px-4 py-2 hover:bg-[#4d4d4d]">Home</a>
+                    <a href="/contact" class="block px-4 py-2 hover:bg-[#4d4d4d]">Contact</a>
+                    
+                    {% if app.user %}
+                        <a href="{{ path('app_pie_chart') }}" class="block px-4 py-2 hover:bg-[#4d4d4d]">Pie Chart</a>
+                        <a href="{{ path('app_show') }}" class="block px-4 py-2 hover:bg-[#4d4d4d]">Transactions</a>
+                        <a href="{{ path('app_logout') }}" class="block px-4 py-2 hover:bg-[#4d4d4d]">Logout</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="block px-4 py-2 hover:bg-[#4d4d4d]">Login</a>
+                        <a href="{{ path('app_register') }}" class="block px-4 py-2 hover:bg-[#4d4d4d]">Register</a>
+                    {% endif %}
+                </div>
+            </nav>
+        </header>
+    {% endblock %}
+
+    <!-- Page Content -->
+    <main class="pt-20 container mx-auto px-4 flex-grow">
+        {% block body %}{% endblock %}
+    </main>
+
+    {% block footer %}
+        <footer class="bg-[#1a1a1a] text-[#e6e6e6] py-6 mt-12">
+            <div class="container mx-auto text-center">
+                <p>&copy; {{ "now"|date("Y") }} Rakshansh. All Rights Reserved.</p>
+                <p class="mt-2">
+                    <a href="{{path('app_privacy_policy')}}" class="text-[#e6e6e6] hover:text-[#b3b3b3] transition duration-200">Privacy Policy</a>
+                    | 
+                    <a href="{{path('app_terms_service')}}" class="text-[#e6e6e6] hover:text-[#b3b3b3] transition duration-200">Terms of Service</a>
+                </p>
+            </div>
+        </footer>
+    {% endblock %}
+
+</body>
+</html>
